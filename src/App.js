@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Router, Switch, Route } from 'react-router'
+import history from './utils/history'
+import Countries from './views/Countries'
+import CountryDetails from './views/CountryDetails'
+import Header from './components/Header'
+import SD from 'simplerdux'
 
 function App() {
+  const {theme} = SD.getState()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={`app-container ${theme}`}>
+      <Header />
+      <Router history={history}>
+        <Switch>
+          <Route exact path='/' component={Countries}/>
+          <Route path='/:countryName' component={CountryDetails}/>
+        </Switch>
+      </Router>
     </div>
-  );
+  )
 }
 
 export default App;

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+
+<h3>Type <b style='color: blue'><i>start()</i></b> in the console to run the algorithm.</h3>
+<script>
+/**
+This algorithm is a recursive pathfinder, it finds the best path from the position 0x0 to the '9' in the below matrix, 
+considering that only 1's are the walkable coordinates.
+It works by recursively analyzing the possible paths tree, after finding all the possible paths, it simply show the shortest one.
+
+To run this script just type 'start()' in the browser console
+*/
+const matrix = [[1,1,1,1],
+								[0,1,1,0],
+								[0,1,0,1],
+								[0,1,9,1],
+								[1,1,1,1]]
+
+// List containing all the possible paths to the target
+const successfulPaths = []
+	
+// Receiving an coordinate and a path returns if the coordinate can be entered for that path
+const coordIsValid = (coord, path) => {
+	// Coordinate is out of the matrix?
+	if(coord.x < 0 || coord.y < 0) return false
+	if(coord.x >= matrix.length) return false
+	if(matrix[coord.x][coord.y] === 0 || matrix[coord.x][coord.y] === undefined) return false
+	// Coordinate was already walked in this path?
+	if(path.filter(c => c.x === coord.x && c.y === coord.y).length > 0) return false
+	return true
+}
+	
+// Receiving an coordinate and a path returns all the walkable neighborhood coordinates of the received coordinate
+const getUnvisitedNeighbors = (coord, path) => {
+	const top = {x: coord.x, y: coord.y-1}
+	const left = {x: coord.x-1, y: coord.y}
+	const right = {x: coord.x+1, y: coord.y}
+	const bottom = {x: coord.x, y: coord.y+1}
+	return [top, left, right, bottom].filter(c => coordIsValid(c, path))
+}
+
+// Evaluate	the next step, from the received coordinate and received path, creating path subtrees if necessary
+const evaluatePath = (coord, path) => {
+	// Add the coordinate to the path
+	path.push(coord)
+	// Found the target?
+	if(matrix[coord.x][coord.y] === 9) {
+		// Save this path as succesful and exit this path subtree
+		successfulPaths.push(path)
+		return
+	}
+	// Get all the next neighbors to visit from this coordinate
+	const neighbors = getUnvisitedNeighbors(coord, path)
+	const clonedPath = [...path]
+	// Visit all the pending neighbors
+	neighbors.forEach((c, idx) => {
+		// Use the current path to the first neighbor
+		if(idx === 0) evaluatePath(c, path)
+		// Create an new path subtree for all the others neighbors
+		if(idx > 0) evaluatePath(c, [...clonedPath])
+	})
+	
+}
+
+// Run the pathfinding algorithm
+const start = () => {
+	// Starts the pathfinding from the position 0x0 and an empty path
+	evaluatePath({x: 0, y: 0}, [])
+	
+	// Cannot find any path?
+	if(successfulPaths.length === 0) {
+		console.log('Can\'t find any path to the destination.')
+		return
+	}
+	// Search for the shortest path an print it
+	let bestPathLength = successfulPaths[0].length
+	let bestPathIdx = 0
+	successfulPaths.forEach((p, idx) => {
+		if(p.length < bestPathLength) {
+			bestPathLength = p.length
+			bestPathIdx = idx
+		}
+	})
+	console.log('The best path is: (', successfulPaths[bestPathIdx].map(c => c.x+'x'+c.y).join(' -> '), '), it takes ' + (bestPathLength-1) + ' moves')
+	
+}
+</script>
+
+</body>
+</html>

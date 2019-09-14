@@ -1,0 +1,345 @@
+@import 'common';
+
+body {
+  margin: 0;
+  font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 7%;
+  height: 80px;
+  &.light {
+    box-shadow: 0 0 7px -5px $shadow-color;
+    background: $light-mode-elements;
+    color: $light-mode-text;
+    & .fas {
+      display: none;
+    }
+  }
+  &.dark {
+    box-shadow: 0 0 7px -5px $shadow-color-dark;
+    background: $dark-mode-elements;
+    color: $dark-mode-text;
+    & .far {
+      display: none;
+    }
+  }
+  & h3, & h5 {
+    margin: 0;
+  }
+  & h5 {
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+.app-container {
+  min-height: 100vh;
+  &.light {  
+    background: $light-mode-background;
+  }
+  &.dark {  
+    background: $dark-mode-background;
+  }
+}
+
+.cards-container {
+  padding: 0 6%;
+  &>div {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+  }
+}
+
+.country-card {
+  display: inline-block;
+  cursor: pointer;
+  width: 265px;
+  border-radius: 5px;
+  &.light {
+    box-shadow: 0 0 7px -5px $shadow-color;
+    background: $light-mode-elements;
+    color: $light-mode-text;
+  }
+  &.dark {
+    box-shadow: 0 0 7px -5px $shadow-color-dark;
+    background: $dark-mode-elements;
+    color: $dark-mode-text;
+  }
+  & .img {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    width: 100%;
+    height: 160px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  & .details {
+    overflow: hidden;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 0 25px;
+    height: 175px;
+    & .title {
+      padding-top: 30px;
+      margin-top: 0px;
+      margin-bottom: 13px;
+      font-weight: 800;
+    }
+    & .item {
+      margin: 5px 0;
+      font-size: $homepage-font-size;
+      font-weight: 600;
+      & span {
+        font-weight: 300;
+      }
+    }
+  }
+}
+
+.cards-search-container {
+  position: relative;
+  padding: 50px 7%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @media (max-width: $break-small) {
+    flex-direction: column;
+    padding-top: 30px;
+  }
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border-radius: 5px;
+  &.light {
+    box-shadow: 0 0 7px -5px $shadow-color;
+    background: $light-mode-elements;
+    & input, & input::placeholder, & i {
+      background: $light-mode-elements;
+      color: $light-mode-input;
+    }
+  }
+  &.dark {
+    box-shadow: 0 0 7px -5px $shadow-color-dark;
+    background: $dark-mode-elements;
+    & input, & input::placeholder, & i {
+      background: $dark-mode-elements;
+      color: $dark-mode-text;
+    }
+  }
+  & i {
+    padding: 0 15px;
+  }
+  & input {
+    padding: 5px;
+    border: none;
+    outline: none;
+    font-size: $homepage-font-size;
+    width: 100%;
+  }
+  @media (min-width: $break-small) {
+    width: 40%;
+  }
+}
+
+.region-select-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0 15px;
+  border-radius: 5px;
+  width: 190px;
+  font-weight: 600;
+  font-size: $homepage-font-size;
+  min-height: 56px;
+  &.light {
+    box-shadow: 0 0 7px -5px $shadow-color;
+    background: $light-mode-elements;
+    color: $light-mode-text;
+  }
+  &.dark {
+    box-shadow: 0 0 7px -5px $shadow-color-dark;
+    background: $dark-mode-elements;
+    color: $dark-mode-text;
+  }
+  & i {
+    font-size: 12px;
+  }
+  @media (max-width: $break-small) {
+    margin-top: 40px;
+  }
+}
+
+.region-select-itens-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  right: 7%;
+  width: 220px;
+  padding: 12px 0;
+  z-index: 1;
+  border-radius: 5px;
+  font-weight: 600;
+  top: 60px;
+  left: 0px;
+  font-size: $homepage-font-size;
+  &.light {
+    box-shadow: 0 0 7px -5px $shadow-color;
+    background: $light-mode-elements;
+    color: $light-mode-text;
+    & span:hover {
+      background: $light-mode-elements-hover;
+    }
+  }
+  &.dark {
+    box-shadow: 0 0 7px -5px $shadow-color-dark;
+    background: $dark-mode-elements;
+    color: $dark-mode-text;
+    & span:hover {
+      background: $dark-mode-elements-hover;
+    }
+  }
+  & span {
+    padding: 3px 25px;
+    transition: all 200ms;
+    cursor: pointer;
+  }
+}
+
+.country-details-container {
+  padding: 0 6% 20px 6%;
+  & .img {
+    width: 100%;
+    height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.back-button-col {
+  margin: 60px 0;
+}
+
+.back-button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 10px 35px;
+  font-weight: 300;
+  transition: all 200ms;
+  font-size: $detail-page-font-size;
+  &.light {
+    box-shadow: 0 0 10px -3px $shadow-color;
+    background: $light-mode-background;
+    color: $light-mode-text;
+    &:active {
+      background: $light-mode-elements-hover;
+    }
+  }
+  &.dark {
+  box-shadow: 0 0 10px -3px $shadow-color-dark;
+  background: $dark-mode-elements;
+    color: $dark-mode-text;
+    &:active {
+      background: $dark-mode-elements-hover;
+    }
+  }
+}
+
+.country-details {
+  &.light {
+    color: $light-mode-text;
+  }
+  &.dark {
+    color: $dark-mode-text;
+  }
+  &.light button {
+    box-shadow: 0 0 7px -4px $shadow-color;
+    background: $light-mode-background;
+    color: $light-mode-text;
+    &:active {
+      background: $light-mode-elements-hover;
+    }
+  }
+  &.dark button {
+    box-shadow: 0 0 7px -4px $shadow-color-dark;
+    background: $dark-mode-elements;
+    color: $dark-mode-text;
+    &:active {
+      background: $dark-mode-elements-hover;
+    }
+  }
+  & h2 {
+    margin-bottom: 30px;
+  }
+  & p {
+    margin: 10px 0;
+    font-size: $detail-page-font-size;
+    font-weight: 600;
+    & span {
+      font-weight: 300;
+    }
+    &.border-countries {
+      margin-top: 50px;
+    }
+  }
+  & button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    font-size: $detail-page-font-size;
+    transition: all 200ms;
+    border-radius: 5px;
+    padding: 5px 25px;
+    margin: 5px;
+  }
+}
+
+.country-flag {
+  padding-right: 30px;
+}
+
+.no-results-message {
+  text-align: center;
+  width: 100%;
+  &.light {
+    color: $light-mode-text;
+  }
+  &.dark {
+    color: $dark-mode-text;
+  }
+}
+
+.loader {
+  opacity: 0;
+  animation: fadein 2s 0.5s forwards;
+  text-align: center;
+  width: 100%;
+  &.light path {
+    stroke: $light-mode-text;
+  }
+  &.dark path {
+    stroke: $dark-mode-text;
+  }
+}
+
+@keyframes fadein {
+  to   { opacity: 1; }
+}
