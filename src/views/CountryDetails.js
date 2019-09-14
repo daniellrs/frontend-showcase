@@ -45,7 +45,7 @@ export class Countrycountry extends Component {
         return
       }
       
-      const response = await HWApiFetch.get(`name/${countryName}`)
+      const response = await HWApiFetch.get(`name/${countryName}?fullText=true`)
       if(response.status && response.status !== 200) {
         this.setState({notFound: true})
         return
