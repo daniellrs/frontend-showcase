@@ -13,17 +13,3 @@ react-grid-system - To help handle with the layout.<br />
 react-loader-spinner - To show a spinner in loading cases.<br />
 redux, react-redux, simplerdux - To use a global state.<br />
 react-router - To handle the website routes.
-
-## pathfinder
-
-Besides the project has a logic test that can be found at pathfinder.html file.
-
-It is a "virtual robot" that can walk up, right, left and bottom. And given a 2d matrix like below, it has to find the shortest path to `9`. `1` is a walkable place. `0` is a hole, and must be avoided.
-
-```
-[[1,1,1,1],
-[0,1,1,0],
-[0,1,0,1],
-[0,1,9,1],
-[1,1,1,1]]
-```
